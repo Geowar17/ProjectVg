@@ -1,0 +1,18 @@
+{% extends 'layouts/base.html'%}
+
+
+
+{%block content%}
+
+
+<h1>New Tasks</h1>
+
+{%for task in tasks%}
+    <div>
+    <p>{{task.project.name}}</p>
+    <p>{{task.title}}</p>
+    <p>{{task.description}}</p>
+    
+    </div>
+{%endfor%}
+{%endblock%}

@@ -1,0 +1,13 @@
+{% extends 'layouts/base.html'%}
+
+{%block content%}
+<h1>Proyectos</h1>
+
+{%for project in projects%}
+<div>
+    <p>{{project.name}}</p>
+    <p>{{project.name_contacto}}</p>
+    <p>{{project.mail}}</p>
+    </div>
+{%endfor%}
+{%endblock%}
