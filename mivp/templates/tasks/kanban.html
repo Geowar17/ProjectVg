@@ -1,10 +1,22 @@
 {% extends 'layouts/base.html' %}
 
 {% block content %}
-<div class="container py-4">
-    <h1 class="text-center mb-4">🗂️ Tablero Kanban</h1>
+<div class="container py-4 position-relative">
+    <h1 class="text-center mb-4">🗂️ Tablero Tareas</h1>
 
-    <div class="row flex-nowrap overflow-auto">
+    <!-- Mensaje -->
+    <p class="text-center text-muted mb-3">Navega entre etapas con las flechas ⬅️ ➡️</p>
+
+    <!-- Botones de scroll -->
+    <button id="scrollLeft" class="btn btn-light shadow position-absolute top-50 start-0 translate-middle-y z-1">
+        ⬅️
+    </button>
+    <button id="scrollRight" class="btn btn-light shadow position-absolute top-50 end-0 translate-middle-y z-1">
+        ➡️
+    </button>
+
+    <!-- Kanban horizontal -->
+    <div id="kanbanContainer" class="row flex-nowrap overflow-auto kanban-scroll px-2">
         {% for stage, tasks in tasks_by_stage.items %}
             <div class="col-md-3">
                 <div class="card shadow-sm mb-4">
@@ -18,7 +30,6 @@
                                     <h5 class="card-title">{{ task.title }}</h5>
                                     <p class="card-text">{{ task.description|truncatewords:15 }}</p>
 
-                                    <!-- Prioridad con badge -->
                                     <p class="mb-1">
                                         <strong>Prioridad:</strong>
                                         <span class="badge 
@@ -30,17 +41,14 @@
                                         </span>
                                     </p>
 
-                                    <!-- Fecha de vencimiento -->
                                     {% if task.due_date %}
                                         <p class="mb-1"><strong>Vence:</strong> {{ task.due_date|date:"d M Y" }}</p>
                                     {% endif %}
 
-                                    <!-- Responsable -->
                                     {% if task.assigned_to %}
                                         <p class="text-muted mb-1"><i class="bi bi-person"></i> {{ task.assigned_to.username }}</p>
                                     {% endif %}
 
-                                    <!-- Controles -->
                                     <div class="d-flex justify-content-between mt-2">
                                         <a href="{% url 'back_stage' task.id %}" class="btn btn-outline-secondary btn-sm">⏪</a>
                                         <a href="{% url 'advance_stage' task.id %}" class="btn btn-outline-primary btn-sm">⏩</a>
@@ -56,5 +64,27 @@
         {% endfor %}
     </div>
 </div>
-{% endblock %}
 
+<!-- Estilos extra -->
+<style>
+    .kanban-scroll {
+        scroll-behavior: smooth;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    .z-1 {
+        z-index: 10;
+    }
+</style>
+
+<!-- JavaScript de scroll -->
+<script>
+    const container = document.getElementById('kanbanContainer');
+    document.getElementById('scrollLeft').addEventListener('click', () => {
+        container.scrollBy({ left: -300, behavior: 'smooth' });
+    });
+    document.getElementById('scrollRight').addEventListener('click', () => {
+        container.scrollBy({ left: 300, behavior: 'smooth' });
+    });
+</script>
+{% endblock %}

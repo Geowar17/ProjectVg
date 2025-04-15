@@ -90,9 +90,9 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('/login/')
+    return redirect('/home/')
 
-from django.shortcuts import get_object_or_404
+
 
 def advance_stage(request, task_id):
     task = get_object_or_404(Tasks, id=task_id)

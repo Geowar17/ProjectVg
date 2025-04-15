@@ -1,13 +1,132 @@
-{% extends 'layouts/base.html'%}
+{% extends 'layouts/base.html' %}
+{% load static %}
 
+{% block content %}
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+    }
 
+    .animated-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #0f2027);
+        background-size: 400% 400%;
+        animation: gradientMove 20s ease infinite;
+        z-index: -2;
+    }
 
+    @keyframes gradientMove {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
 
+    .particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 80%;
+        height: 80%;
+        background-image: radial-gradient(white 1px, transparent 1px);
+        background-size: 50px 50px;
+        opacity: 0.05;
+        animation: starsMove 60s linear infinite;
+        z-index: -1;
+    }
 
-{%block content%}
+    @keyframes starsMove {
+        0% { background-position: 0 0; }
+        100% { background-position: 1000px 1000px; }
+    }
 
-<h2>Bienvenido a la página de inicio</h2>
+    .hero-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 80vh;
+        text-align: center;
+        color: #ffffff;
+        z-index: 1;
+        position: relative;
+        animation: fadeIn 2s ease-in-out;
+    }
 
+    .hero-logo {
+        width: 110px;
+        height: auto;
+        margin-bottom: 20px;
+        animation: floatIn 2s ease-in-out;
+    }
 
+    .hero-title {
+        font-size: 3rem;
+        font-weight: bold;
+        animation: slideIn 2s ease-in-out;
+    }
 
-{%endblock%}
+    .hero-subtitle {
+        font-size: 1.4rem;
+        margin-top: 10px;
+        color: #ccc;
+        animation: fadeIn 3s ease-in-out;
+    }
+
+    .start-button {
+        margin-top: 30px;
+        padding: 12px 30px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        background-color: #00c9a7;
+        color: #000;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        animation: buttonSlideIn 2.5s ease-in-out;
+    }
+
+    .start-button:hover {
+        background-color: #00b39f;
+        transform: scale(1.05);
+    }
+
+    @keyframes floatIn {
+        from { transform: translateY(-40px); opacity: 0; }
+        to   { transform: translateY(0px); opacity: 1; }
+    }
+
+    @keyframes slideIn {
+        from { transform: translateY(20px); opacity: 0; }
+        to   { transform: translateY(0px); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+
+    @keyframes buttonSlideIn {
+        from { transform: translateY(40px); opacity: 0; }
+        to   { transform: translateY(0); opacity: 1; }
+    }
+</style>
+
+<!-- Fondo animado -->
+<div class="animated-bg"></div>
+<div class="particles"></div>
+
+<!-- Sección principal -->
+<div class="hero-section">
+    <img src="{% static 'img/logo-vigia-retina.png' %}" alt="Logo Vigía" class="hero-logo">
+    <div class="hero-title">Bienvenido a Vigía</div>
+    <div class="hero-subtitle">Tu solución integral en gestión de proyectos</div>
+
+    <a href="{% url 'projects' %}" class="start-button mt-4">🚀 Comenzar ahora</a>
+</div>
+{% endblock %}
