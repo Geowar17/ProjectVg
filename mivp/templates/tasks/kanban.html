@@ -1,0 +1,60 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<div class="container py-4">
+    <h1 class="text-center mb-4">🗂️ Tablero Kanban</h1>
+
+    <div class="row flex-nowrap overflow-auto">
+        {% for stage, tasks in tasks_by_stage.items %}
+            <div class="col-md-3">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-primary text-white text-center fw-bold">
+                        {{ stage.name }}
+                    </div>
+                    <div class="card-body" style="min-height: 200px;">
+                        {% for task in tasks %}
+                            <div class="card mb-3 border-0 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ task.title }}</h5>
+                                    <p class="card-text">{{ task.description|truncatewords:15 }}</p>
+
+                                    <!-- Prioridad con badge -->
+                                    <p class="mb-1">
+                                        <strong>Prioridad:</strong>
+                                        <span class="badge 
+                                            {% if task.priority == 'high' %} bg-danger 
+                                            {% elif task.priority == 'medium' %} bg-warning text-dark 
+                                            {% else %} bg-success 
+                                            {% endif %}">
+                                            {{ task.get_priority_display }}
+                                        </span>
+                                    </p>
+
+                                    <!-- Fecha de vencimiento -->
+                                    {% if task.due_date %}
+                                        <p class="mb-1"><strong>Vence:</strong> {{ task.due_date|date:"d M Y" }}</p>
+                                    {% endif %}
+
+                                    <!-- Responsable -->
+                                    {% if task.assigned_to %}
+                                        <p class="text-muted mb-1"><i class="bi bi-person"></i> {{ task.assigned_to.username }}</p>
+                                    {% endif %}
+
+                                    <!-- Controles -->
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <a href="{% url 'back_stage' task.id %}" class="btn btn-outline-secondary btn-sm">⏪</a>
+                                        <a href="{% url 'advance_stage' task.id %}" class="btn btn-outline-primary btn-sm">⏩</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% empty %}
+                            <p class="text-muted text-center">Sin tareas</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+

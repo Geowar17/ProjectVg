@@ -1,14 +1,33 @@
-{% extends 'layouts/base.html'%}
+{% extends 'layouts/base.html' %}
 
-{%block content%}
-<h1>Crear Proyectos</h1>
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">🛠 Crear Proyecto</h1>
 
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <form method="POST" novalidate>
+                        {% csrf_token %}
 
-<form method="POST" >
-    {% csrf_token %}
-  
-    {{ form.as_p }}
-    <button type="submit">Crear Proyecto</button>
+                        {% for field in form %}
+                            <div class="mb-3">
+                                <label class="form-label">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="text-danger small">
+                                        {{ field.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
 
-
-{%endblock%}
+                        <button type="submit" class="btn btn-primary">Crear Proyecto</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

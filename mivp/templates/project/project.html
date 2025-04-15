@@ -1,13 +1,22 @@
-{% extends 'layouts/base.html'%}
+{% extends 'layouts/base.html' %}
 
-{%block content%}
-<h1>Proyectos</h1>
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4 text-center">📁 Proyectos</h1>
 
-{%for project in projects%}
-<div>
-    <p>{{project.name}}</p>
-    <p>{{project.name_contacto}}</p>
-    <p>{{project.mail}}</p>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {% for project in projects %}
+        <div class="col">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title">{{ project.name }}</h5>
+                    <p class="card-text"><strong>Contacto:</strong> {{ project.name_contact }}</p>
+                    <p class="card-text"><strong>Email:</strong> {{ project.mail }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-{%endfor%}
-{%endblock%}
+</div>
+{% endblock %}
+

@@ -1,14 +1,32 @@
-{% extends 'layouts/base.html'%}
-
-{%block content%}
-<h1>Crear Tareas</h1>
+{% extends 'layouts/base.html' %}
+{% load widget_tweaks %}
 
 
-<form method="POST" >
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center mb-4">📝 Crear Nueva Tarea</h1>
 
-    {% csrf_token %}
-   
-    {{ form.as_p }}
-    <button type="submit">Crear Tarea</button>
-</form>
-{%endblock%}
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+
+                {% for field in form %}
+                    <div class="mb-3">
+                        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                        {{ field|add_class:"form-control" }}
+                        {% if field.errors %}
+                            <div class="text-danger small">
+                                {{ field.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+                <button type="submit" class="btn btn-primary">Crear Tarea</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
