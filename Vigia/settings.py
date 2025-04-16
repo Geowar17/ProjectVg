@@ -128,3 +128,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_TRUSTED_ORIGINS = [
     'https://a9d9-191-113-214-210.ngrok-free.app'
 ]
+LOGIN_URL = '/login/'

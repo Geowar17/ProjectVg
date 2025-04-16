@@ -13,7 +13,7 @@ class ViewTests(TestCase):
 
     def test_login_required_redirect(self):
         response = self.client.get(reverse('kanban'))
-        self.assertRedirects(response, '/login/?next=/kanban')
+        self.assertRedirects(response, '/login/?next=/kanban/')
 
     def test_authenticated_user_kanban(self):
         self.client.login(username='testuser', password='1234')
