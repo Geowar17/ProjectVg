@@ -20,7 +20,7 @@ Tecnologías utilizadas:
 
 Backend: Django 4.2
 
-Base de datos: SQLite (por defecto)
+Base de datos: MySql (por defecto)
 
 Frontend: HTML, CSS puro, Bootstrap 5
 
