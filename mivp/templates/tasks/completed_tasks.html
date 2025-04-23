@@ -1,0 +1,18 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+<h2>✅ Tareas Completadas</h2>
+
+{% if tasks %}
+    <ul>
+    {% for task in tasks %}
+        <li>
+            <strong>{{ task.title }}</strong> del proyecto <em>{{ task.project.name }}</em>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay tareas completadas.</p>
+{% endif %}
+
+<a href="{% url 'kanban' %}" class="btn btn-secondary mt-3">🔙 Volver al Kanban</a>
+{% endblock %}

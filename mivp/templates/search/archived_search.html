@@ -1,0 +1,35 @@
+<h2>Buscar Archivados y Completados</h2>
+
+<form method="get" class="mb-4">
+    {{ form.q }}
+    <button type="submit" class="btn btn-primary mt-2">Buscar</button>
+</form>
+
+{% if query %}
+    <h4>Resultados para "{{ query }}":</h4>
+
+    <h5>📁 Proyectos Archivados</h5>
+    {% for project in archived_projects %}
+        <div class="card mb-2 p-2">
+            <strong>{{ project.name }}</strong><br>
+            Contacto: {{ project.name_contacto }}<br>
+            Correo: {{ project.mail }}
+        </div>
+    {% empty %}
+        <p>No se encontraron proyectos archivados.</p>
+    {% endfor %}
+
+    <h5>✅ Tareas Completadas</h5>
+    {% for task in completed_tasks %}
+        <div class="card mb-2 p-2">
+            <strong>{{ task.title }}</strong><br>
+            Proyecto: {{ task.project.name }}<br>
+            Descripción: {{ task.description }}
+        </div>
+    {% empty %}
+        <p>No se encontraron tareas completadas.</p>
+    {% endfor %}
+
+{% else %}
+    <p>Escribe algo para buscar entre los proyectos archivados y las tareas completadas.</p>
+{% endif %}

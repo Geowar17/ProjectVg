@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mivp',
-    'widget_tweaks'
+    'widget_tweaks',
+    'crispy_forms',
+    "crispy_bootstrap5", 
 ]
 
 MIDDLEWARE = [
@@ -78,10 +80,15 @@ WSGI_APPLICATION = 'Vigia.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'vigia_db',
+        'USER': 'root',
+        'PASSWORD':'geo1609',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
+
 
 
 # Password validation
@@ -126,6 +133,23 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://a9d9-191-113-214-210.ngrok-free.app'
+    'https://4a8b-191-113-221-77.ngrok-free.app'
 ]
 LOGIN_URL = '/login/'
+
+import os
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = ["bootstrap5"]
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "4a8b-191-113-221-77.ngrok-free.app",
+]
+
+

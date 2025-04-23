@@ -1,6 +1,11 @@
 from django.contrib import admin
-from .models import Projects, Tasks, Stage
+from .models import Projects, Tasks, Stage, Profile
 # Register your models here.
+
+
+
+
+
 
 admin.site.site_header = "MIVP Admin"
 admin.site.site_title = "MIVP Admin Portal"
@@ -12,7 +17,7 @@ admin.site.index_title = "Welcome to MIVP Admin Portal"
 # Personalización del modelo Project
 @admin.register(Projects)
 class ProjectsAdmin(admin.ModelAdmin):
-    list_display = ('name', 'name_contacto', 'mail', 'number_contacto')
+    list_display = ('name', 'name_contacto', 'mail', 'number_contacto', 'direction_contac')
     search_fields = ('name', 'name_contacto', 'mail')
     list_filter = ('name',)
 
@@ -31,3 +36,5 @@ class StageAdmin(admin.ModelAdmin):
     list_display = ('name', 'default_user')
     search_fields = ('name',)
     autocomplete_fields = ['default_user']
+
+admin.site.register(Profile)

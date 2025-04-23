@@ -1,0 +1,49 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Proyecto: {{ project.name }}</h2>
+
+  <hr>
+
+  <h4>📎 Documentos del Proyecto</h4>
+  {% if documents %}
+    <ul class="list-group mb-4">
+      {% for doc in documents %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div>
+            {% if doc.file.url|slice:"-4:" == ".pdf" %}
+              <i class="bi bi-file-earmark-pdf-fill text-danger"></i>
+            {% elif doc.file.url|slice:"-4:" == ".jpg" or doc.file.url|slice:"-5:" == ".jpeg" or doc.file.url|slice:"-4:" == ".png" %}
+              <i class="bi bi-file-earmark-image-fill text-primary"></i>
+            {% elif doc.file.url|slice:"-4:" == ".doc" or doc.file.url|slice:"-5:" == ".docx" %}
+              <i class="bi bi-file-earmark-word-fill text-info"></i>
+            {% else %}
+              <i class="bi bi-file-earmark-fill"></i>
+            {% endif %}
+            <a href="{{ doc.file.url }}" target="_blank">{{ doc.name }}</a>
+          </div>
+          <div>
+            <small class="text-muted">{{ doc.uploaded_at|date:"d M Y H:i" }}</small>
+            <a href="{% url 'delete_document' doc.id %}" class="btn btn-sm btn-outline-danger ms-2">Eliminar</a>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <div class="alert alert-info">No hay documentos subidos aún.</div>
+  {% endif %}
+
+  <hr>
+
+  <h4>📤 Subir nuevo documento</h4>
+  <form method="post" enctype="multipart/form-data" class="mt-3">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-primary mt-2">Subir</button>
+  </form>
+</div>
+{% endblock %}
+

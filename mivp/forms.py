@@ -2,6 +2,7 @@ from django import forms
 from .models import Projects, Stage
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from .models import ProjectDocument
 
 # Formulario para crear un nuevo proyecto
 class ProjectNewForm(forms.Form):
@@ -137,4 +138,33 @@ class StageForm(forms.Form):
         label='Responsable por defecto',
         widget=forms.Select(attrs={'class': 'form-select'})
     )
+    
+    RESPONSIBLE_ROLE_CHOICES = [
+        ('admin', 'Administrador'),
+        ('reviewer', 'Revisor'),
+        ('standard', 'Usuario Estándar'),
+    ]
+    responsible_role = forms.ChoiceField(
+        choices=RESPONSIBLE_ROLE_CHOICES,
+        label='Rol responsable de esta etapa',
+        widget=forms.Select(attrs={'class': 'form-select'})
+    )
 
+# forms.py
+
+
+class ProjectDocumentForm(forms.ModelForm):
+    class Meta:
+        model = ProjectDocument
+        fields = ['name', 'file']
+
+class SearchForm(forms.Form):
+    q = forms.CharField(
+        label='Buscar',
+        max_length=100,
+        required=False,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Buscar por nombre de proyecto, contacto o título de tarea...'
+        })
+    )

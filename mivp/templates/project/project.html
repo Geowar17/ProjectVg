@@ -1,22 +1,29 @@
 {% extends 'layouts/base.html' %}
-
 {% block content %}
-<div class="container mt-4">
-    <h1 class="mb-4 text-center">📁 Proyectos</h1>
+<div class="container py-4">
+    <h2 class="mb-4">📋 Lista de Proyectos</h2>
 
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <ul class="list-group">
         {% for project in projects %}
-        <div class="col">
-            <div class="card h-100 shadow-sm border-0">
-                <div class="card-body">
-                    <h5 class="card-title">{{ project.name }}</h5>
-                    <p class="card-text"><strong>Contacto:</strong> {{ project.name_contact }}</p>
-                    <p class="card-text"><strong>Email:</strong> {{ project.mail }}</p>
-                </div>
-            </div>
-        </div>
+            {% if not project.is_archived %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>{{ project.name }}</strong><br>
+                        <small>Contacto: {{ project.name_contacto }}</small>
+                    </div>
+                    <div class="btn-group">
+                        <a href="{% url 'project_detail' project.id %}" class="btn btn-sm btn-outline-primary">
+                            📁 Documentación
+                        </a>
+                        <a href="{% url 'archive_project' project.id %}" class="btn btn-sm btn-outline-warning">
+                            🗃 Archivar
+                        </a>
+                    </div>
+                </li>
+            {% endif %}
+        {% empty %}
+            <li class="list-group-item">No hay proyectos registrados.</li>
         {% endfor %}
-    </div>
+    </ul>
 </div>
 {% endblock %}
-
