@@ -1,31 +1,106 @@
-🛠 Proyecto Vigía — Sistema de Gestión de Proyectos y Tareas
 
-Descripción general:
+# 🛠 Vigía Project — Project and Task Management System
 
-Vigía es una aplicación web desarrollada con Django, orientada a la gestión eficiente de proyectos, tareas y etapas. Ofrece una interfaz moderna y visualmente atractiva, incluyendo un tablero Kanban interactivo que permite seguir el flujo de trabajo de manera clara y estructurada.
+## 🔍 Overview
 
-Características principales:
+**Vigía** is a web application built with Django, designed to streamline project and task management through a clean, visual, and interactive experience. It includes a dynamic Kanban board that helps users clearly track the progress of tasks through customizable stages.
 
-📁 Gestión de proyectos: Registro de información clave como contacto, dirección y responsable.
+---
 
-✅ Gestión de tareas: Tareas asociadas a proyectos, asignadas a usuarios, con prioridad, fecha límite y descripción detallada.
+## ✨ Key Features
 
-📌 Etapas personalizables: Organización de tareas en distintas etapas del proceso (como "Por hacer", "En progreso", "Finalizado").
+### 📁 Project Management
+- Create and manage projects with key details such as contact info, address, and project owner.
 
-📊 Vista Kanban dinámica: Tablero que muestra todas las etapas, incluso si no tienen tareas, permitiendo avanzar o retroceder tareas de etapa con un clic.
+### ✅ Task Management
+- Associate tasks with projects and users.
+- Define task priority, due dates, and detailed descriptions.
 
-🧑‍💼 Sistema de usuarios: Registro, autenticación y asociación de tareas con usuarios.
+### 📌 Customizable Stages
+- Organize tasks into process stages like **To Do**, **In Progress**, and **Completed**.
+- Flexible stage creation and editing based on your workflow.
 
-Tecnologías utilizadas:
+### 📊 Interactive Kanban View
+- Visual Kanban board showing all stages—even empty ones.
+- Easily drag and drop or click to move tasks between stages.
 
-Backend: Django 4.2
+### 👥 User Management
+- User registration and authentication.
+- Tasks are assigned to specific users to ensure accountability.
 
-Base de datos: MySql (por defecto)
+---
 
-Frontend: HTML, CSS puro, Bootstrap 5
+## ⚙️ Technologies Used
 
-Autenticación de usuarios integrada
+- **Backend**: Django 4.2
+- **Database**: MySQL (default)
+- **Frontend**: HTML, CSS, Bootstrap 5
+- **Authentication**: Built-in Django authentication system
 
-Objetivo del proyecto:
+---
 
-Facilitar el control y seguimiento del avance de tareas en proyectos colaborativos o personales, ofreciendo una herramienta visual intuitiva para equipos de trabajo.
+## 🎯 Project Goal
+
+The main goal of **Vigía** is to provide a visual and intuitive tool for tracking task progress within collaborative or personal projects. It is especially suited for teams that need a lightweight, effective way to organize tasks, monitor workflow, and stay productive.
+
+---
+
+## 📌 Status
+
+🟢 In active development — open to improvements and new features.
+
+---
+
+## 📁 Folder Structure (Example)
+
+```
+vigia/
+├── core/                # Main app: Projects, Tasks, Stages
+├── users/               # Custom user model and authentication
+├── templates/           # HTML templates
+├── static/              # CSS, JS, images
+├── db.sqlite3 / MySQL   # Default database
+├── manage.py
+└── README.md
+```
+
+---
+
+## 🚀 Getting Started (Development)
+
+1. **Clone the repository:**
+```bash
+git clone https://github.com/yourusername/vigia.git
+cd vigia
+```
+
+2. **Create a virtual environment and install dependencies:**
+```bash
+python -m venv env
+source env/bin/activate  # On Windows use `env\Scripts\activate`
+pip install -r requirements.txt
+```
+
+3. **Run migrations and start the server:**
+```bash
+python manage.py migrate
+python manage.py runserver
+```
+
+4. **Access the app:**
+```
+http://localhost:8000/
+```
+
+---
+
+## 🙋‍♂️ Author
+
+**Geovanny (Geowar17)**  
+GitHub: [https://github.com/Geowar17](https://github.com/Geowar17)
+
+---
+
+## 📃 License
+
+This project is open-source and available under the [MIT License](LICENSE).
